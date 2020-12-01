@@ -7,7 +7,7 @@ module.exports = class extends Discord.Client {
       defaultPrefix: 'k!',
       color: '#03D3FC',
       owners: ['396110783680872449'],
-      token: 'segue eu la na twitch kkkk https://www.twitch.tv/ymiguell',
+      token: 'kkkk um bobo',
     }
 
     this.commands = new Discord.Collection();

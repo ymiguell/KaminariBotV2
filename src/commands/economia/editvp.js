@@ -7,7 +7,7 @@ module.exports = {
   description: 'Permite editar a quantidade de VPs de qualquer usuário.',
   usage: '<@valor> <user>',
   category: 'Moderation',
-  aliases: [''],
+  aliases: ['changevp'],
   cooldown: 2,
 
 async execute(message, args) {

@@ -1,4 +1,4 @@
-# KaminariBot v1.0.4-dev
+# KaminariBot v1.0.5-dev
 
 A simple bot for Discord, using discord.js
 

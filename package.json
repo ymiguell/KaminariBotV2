@@ -20,8 +20,10 @@
   "homepage": "https://github.com/KallelGaNewk/KaminariBot#readme",
   "dependencies": {
     "axios": "^0.21.0",
+    "discord-giveaways": "^4.2.1",
     "discord.js": "^12.5.1",
     "fs": "0.0.1-security",
+    "ms": "^2.1.2",
     "parse-ms": "^2.1.0",
     "quick.db": "^7.1.3"
   }

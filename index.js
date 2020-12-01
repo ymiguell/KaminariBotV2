@@ -18,6 +18,10 @@ for (const file of commandFiles) {
 // Switch presence
 client.on('ready', () => {
   console.log(`${client.user.tag} ready.\n${client.guilds.cache.size} guilds`);
+  const cEconomy = fs.readdirSync('./src/commands/economia').filter(file => file.endsWith('.js'));
+  for (const file of cEconomy) { const command = require(`./src/commands/economia/${file}`); client.commands.set(command.name, command); };
+  const cVale = fs.readdirSync('./src/commands/vale').filter(file => file.endsWith('.js'));
+  for (const file of cVale) { const command = require(`./src/commands/vale/${file}`); client.commands.set(command.name, command); };
 
   activities = [
     {
@@ -189,5 +193,20 @@ client.on('message', async message => {
     message.reply(':x: **|** Um erro ocorreu, tente novamente mais tarde.');
   }
 })
+
+//GiveAways System
+const { GiveawaysManager } = require('discord-giveaways');
+
+client.giveawaysManager = new GiveawaysManager(client, {
+  storage: "./giveaways.json",
+  updateCountdownEvery: 5000,
+  default: {
+    botsCanWin: false,
+    exemptPermissions: ["MANAGE_MESSAGES", "ADMINISTRATOR"],
+    embedColor: "#FF0000",
+    reaction: "🎉"
+  }
+});
+//GiveAways System
 
 client.login(client.config.token);
