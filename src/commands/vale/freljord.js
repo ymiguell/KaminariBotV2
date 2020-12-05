@@ -5,7 +5,7 @@ module.exports = {
   name: 'freljord',
   description: 'Você compra um cargo com determinada contia de VPs',
   usage: '<região>',
-  category: 'Economy',
+  category: 'Vale',
   aliases: ['glacinata'],
   cooldown: 2,
 

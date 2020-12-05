@@ -1,3 +1,4 @@
+const Discord = require('discord.js');
 const { MessageEmbed } = require('discord.js');
 const db = require('quick.db');
 
@@ -6,8 +7,8 @@ module.exports = {
   description: 'Veja sua quantidade de vps',
   aliases: ['valespoints', 'valepoints', 'valepoint', 'vps'],
   usage: '',
+  category: 'Economy',
   cooldown: 5,
-  permission: '*',
 
   async execute(message, args) {
 

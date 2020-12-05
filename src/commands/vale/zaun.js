@@ -5,7 +5,7 @@ module.exports = {
   name: 'zaun',
   description: 'Você compra um cargo com determinada contia de VPs',
   usage: '<região>',
-  category: 'Economy',
+  category: 'Vale',
   aliases: ['baderneirodezaun', 'baderneirozaun'],
   cooldown: 2,
 

@@ -5,7 +5,7 @@ module.exports = {
   name: 'shurima',
   description: 'Você compra um cargo com determinada contia de VPs',
   usage: '<região>',
-  category: 'Economy',
+  category: 'Vale',
   aliases: ['exploradordeshurima', 'exploradorshurima'],
   cooldown: 2,
 

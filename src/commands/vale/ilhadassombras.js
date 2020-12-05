@@ -5,8 +5,8 @@ module.exports = {
   name: 'ilhadassombras',
   description: 'Você compra um cargo com determinada contia de VPs',
   usage: '<região>',
-  category: 'Economy',
-  aliases: ['ilhasdassombras', 'ilhasdasombras', 'ilhadasombra', 'fantasmaDasilhasdassombras', 'fantasmaDasilhasdasombras'],
+  category: 'Vale',
+  aliases: ['ilhasdassombras', 'ilhasdasombras', 'ilhadasombra', 'fantasmaDasilhasdassombras', 'fantasmadasilhasdasombras'],
   cooldown: 2,
 
   async execute(message, args) {

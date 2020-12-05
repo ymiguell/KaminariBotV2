@@ -2,15 +2,15 @@ const { MessageEmbed } = require('discord.js');
 
 module.exports = {
   name: 'help',
-  description: 'List of commands',
-  aliases: ['commands', 'ajuda'],
+  description: 'Lista de Comandos',
+  aliases: ['commands', 'ajuda', 'comandos'],
   usage: '[command]',
   category: 'Utils',
   cooldown: 5,
   permission: '*',
   async execute(message, args) {
     if (!args[0]) {
-      const utilsCommands = [], modCommands = [], funCommands = [];
+      const utilsCommands = [], modCommands = [], funCommands = [], economyCommands = [], valeCommands = [], musicCommands = [];
 
       message.client.commands.forEach(c => {
         switch (c.category) {
@@ -23,10 +23,19 @@ module.exports = {
           default:
             utilsCommands.push(`\`${c.name} ${c.usage}\` ${c.description}`)
             break;
+          case 'Economy':
+            economyCommands.push(`\`${c.name} ${c.usage}\` ${c.description}`)
+            break;
+          case 'Vale':
+            valeCommands.push(`\`${c.name} ${c.usage}\` ${c.description}`)
+            break;
+          case 'Music':
+            musicCommands.push(`\`${c.name} ${c.usage}\` ${c.description}`)
+            break;
         }
       });
 
-      console.log(utilsCommands, modCommands, funCommands)
+      console.log(utilsCommands, modCommands, funCommands, economyCommands, valeCommands, musicCommands)
 
       const embed = new MessageEmbed()
         .setAuthor(`${message.client.user.username} commands`, message.client.user.displayAvatarURL({ format: 'png', size: 128 }))
@@ -42,7 +51,19 @@ module.exports = {
           {
             name: 'Utilidades',
             value: utilsCommands.join('\n')
-          }
+          },
+          {
+            name: 'Economia',
+            value: economyCommands.join('\n')
+          },
+          {
+            name: 'Vale',
+            value: valeCommands.join('\n')
+          },
+          {
+            name: 'Música',
+            value: musicCommands.join('\n')
+          },
         ])
         .setColor(message.client.config.color)
         .setFooter(
@@ -62,7 +83,7 @@ module.exports = {
     } else {
       const info = message.client.commands.get(args[0]) || message.client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(args[0]));
       if (!info) return message.channel.send(
-        new MessageEmbed()
+        new Discord.MessageEmbed()
           .setDescription(`Esse comando não foi encontrado, tente usar \`${message.client.config.prefix}help\``)
           .setFooter(message.author.tag, message.author.displayAvatarURL({ format: 'png', dynamic: true }))
           .setColor('RED')
@@ -74,7 +95,7 @@ module.exports = {
         .addField('Need permission', info.permission)
         .addField('Aliases', info.aliases.join(', '))
         .setColor(message.client.config.color)
-        .setFooter(message.author.tag + ' | <required> [optional]', message.author.displayAvatarURL({ dynamic: true }))
+        .setFooter(message.author.tag + ' | <obrigatório> [opcional]', message.author.displayAvatarURL({ dynamic: true }))
 
       message.channel.send(embedInfo);
     }

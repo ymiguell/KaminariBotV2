@@ -1,11 +1,13 @@
-const db = require('quick.db');
+const Discord = require('discord.js');
 const { MessageEmbed } = require('discord.js');
+const db = require('quick.db');
 const ms = require('parse-ms');
 
 module.exports = {
   name: "criaçãolendário",
   description: "Cria para ganhar VPs",
   category: 'Economy',
+  usage: '',
   aliases: ['criaçaolendário', 'criacãolendário', 'criacaolendário'],
   cooldown: 2,
 
@@ -21,14 +23,20 @@ module.exports = {
     if (lendario !== null && timeout - (Date.now() - lendario) > 0) {
       let time = ms(timeout - (Date.now() - lendario));
 
-      return message.channel.send(`Você já recebeu seu prêmio lendário. Volte em ${time.hours}h, ${time.minutes}m, e ${time.seconds}s`)
+      return message.channel.send(
+        new Discord.MessageEmbed()
+          .setTitle('Aguarde...')
+          .setColor('BLUE')
+          .setDescription(`Você não pode criar novamente em ${time.hours}h, ${time.minutes}m, e ${time.seconds}s`)
+          .setFooter(message.author.tag, message.author.displayAvatarURL({ dynamic: true }))
+      );
     } else {
       db.add(`money_${message.guild.id}_${user.id}`, amount);
       db.set(`lendario_${message.guild.id}_${user.id}`, Date.now());
 
       const embed = new MessageEmbed()
       .setTitle('Você criou e ganhou')
-      .setDescription(`${amount} VPs`)
+      .setDescription(`${amount} VPs :diamond_shape_with_a_dot_inside:`)
       .setColor('BLUE')
       .setFooter(message.author.tag, message.author.displayAvatarURL());
 

@@ -3,7 +3,7 @@ const db = require('quick.db');
 
 module.exports = {
   name: 'avisos',
-  decription: 'Mostra o número de avisos do usuário mencionado.',
+  description: 'Mostra o número de avisos do usuário mencionado.',
   usage: '[@member]',
   category: 'Moderation',
   aliases: '[warnings]',

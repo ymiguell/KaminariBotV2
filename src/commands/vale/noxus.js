@@ -5,7 +5,7 @@ module.exports = {
   name: 'noxus',
   description: 'Você compra um cargo com determinada contia de VPs',
   usage: '<região>',
-  category: 'Economy',
+  category: 'Vale',
   aliases: ['conquistadornoxiano', 'noxiano'],
   cooldown: 2,
 

@@ -5,7 +5,7 @@ module.exports = {
   name: 'ixtal',
   description: 'Você compra um cargo com determinada contia de VPs',
   usage: '<região>',
-  category: 'Economy',
+  category: 'Vale',
   aliases: ['magodeixtal', 'magoixtal'],
   cooldown: 2,
 

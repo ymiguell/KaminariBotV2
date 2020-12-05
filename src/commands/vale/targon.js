@@ -5,7 +5,7 @@ module.exports = {
   name: 'targon',
   description: 'Você compra um cargo com determinada contia de VPs',
   usage: '<região>',
-  category: 'Economy',
+  category: 'Vale',
   aliases: ['protetordetargon', 'protetortargon'],
   cooldown: 2,
 

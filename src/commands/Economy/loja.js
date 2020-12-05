@@ -1,4 +1,5 @@
 const Discord = require('discord.js');
+const { MessageEmbed } = require('discord.js');
 const { execute } = require('./editvp');
 
 module.exports = {
@@ -14,7 +15,7 @@ module.exports = {
     const embed = new Discord.MessageEmbed()
       .setColor('YELLOW')
       .setTitle('Loja')
-      .setDescription(`Item 1 - 150.000 VP\nItem 2 - 50.000 VP\n Item 3 - 45.000 VP\nItem 4 - 30.000 VP. \n Item 5 - 24.000 VP. \n Item 6 - 10 .000 VP.`)
+      .setDescription(`2800RP - 50.000 VPs\n1380RP - 25.000 VPs`)
       .setTimestamp();
 
     message.channel.send(embed);

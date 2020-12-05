@@ -18,10 +18,16 @@ for (const file of commandFiles) {
 // Switch presence
 client.on('ready', () => {
   console.log(`${client.user.tag} ready.\n${client.guilds.cache.size} guilds`);
-  const cEconomy = fs.readdirSync('./src/commands/economia').filter(file => file.endsWith('.js'));
-  for (const file of cEconomy) { const command = require(`./src/commands/economia/${file}`); client.commands.set(command.name, command); };
-  const cVale = fs.readdirSync('./src/commands/vale').filter(file => file.endsWith('.js'));
-  for (const file of cVale) { const command = require(`./src/commands/vale/${file}`); client.commands.set(command.name, command); };
+  const cEconomy = fs.readdirSync('./src/commands/Economy').filter(file => file.endsWith('.js'));
+  for (const file of cEconomy) { const command = require(`./src/commands/Economy/${file}`); client.commands.set(command.name, command); };
+  const cVale = fs.readdirSync('./src/commands/Vale').filter(file => file.endsWith('.js'));
+  for (const file of cVale) { const command = require(`./src/commands/Vale/${file}`); client.commands.set(command.name, command); };
+  const cFun = fs.readdirSync('./src/commands/Fun').filter(file => file.endsWith('.js'));
+  for (const file of cFun) { const command = require(`./src/commands/Fun/${file}`); client.commands.set(command.name, command); };
+  const cModeration = fs.readdirSync('./src/commands/Moderation').filter(file => file.endsWith('.js'));
+  for (const file of cModeration) { const command = require(`./src/commands/Moderation/${file}`); client.commands.set(command.name, command); };
+  const cUtils = fs.readdirSync('./src/commands/Utils').filter(file => file.endsWith('.js'));
+  for (const file of cUtils) { const command = require(`./src/commands/Utils/${file}`); client.commands.set(command.name, command); };
 
   activities = [
     {
@@ -53,58 +59,36 @@ client.on('ready', () => {
 });
 
 // welcome system
-client.on('guildMemberAdd', async member => {
-  if (!member.guild) return;
-
-  const welcomeChannelID = await db.get(`guild_${member.guild.id}.welcomeChannel`);
-  const welcomeChannel = member.guild.channels.cache.get(welcomeChannelID);
-  const prefix = await getPrefix(member.guild, client);
-
-  if (!welcomeChannelID) return;
-  if (!welcomeChannel || welcomeChannel.type === 'category' || welcomeChannel.type === 'voice') {
-    return member.guild.owner.user.send(`O canal que você definiu \`${welcomeChannelID}\` não existe ou é invalido. Use \`${prefix}setWelcomeChannel <Menção de Canal/ID de Canal>\``)
+client.on("guildMemberAdd", (member) => {
+  let chx = db.get(`welchannel_${member.guild.id}`);
+  if (chx === null) {
+    return;
   }
-
-  const permissions = welcomeChannel.permissionsFor(member.guild.me);
-  if (permissions.has('SEND_MESSAGES') || permissions.has('VIEW_CHANNEL')) {
-    return member.guild.owner.user.send(`O canal que você definiu \`${welcomeChannelID}\` está privado. Defina um canal válido usando \`${prefix}setWelcomeChannel <Menção de Canal/ID de Canal>\``)
-  }
-
   const embed = new Discord.MessageEmbed()
+    .setColor('#00fbff')
     .setThumbnail(member.guild.iconURL({ dynamic: true, size: 512, format: 'png' }))
     .setImage(member.user.displayAvatarURL({ dynamic: true, size: 512, format: 'png' }))
     .setDescription(`Bem-vindo \`${member.user.tag}\`!`)
     .setFooter(`ID: ${member.user.id}`);
 
-  welcomeChannel.send(embed).catch(console.error);
-})
+  client.channels.cache.get(chx).send(embed).catch(console.error);
+});
 
 // welcome system
-client.on('guildMemberRemove', async member => {
-  if (!member.guild) return;
-
-  const welcomeChannelID = await db.get(`guild_${member.guild.id}.welcomeChannel`);
-  const welcomeChannel = member.guild.channels.cache.get(welcomeChannelID);
-  const prefix = await getPrefix(message.guild, client);
-
-  if (!welcomeChannelID) return;
-  if (!welcomeChannel || welcomeChannel.type === 'category' || welcomeChannel.type === 'voice') {
-    return member.guild.owner.user.send(`O canal que você definiu \`${welcomeChannelID}\` não existe ou é invalido. Use \`${prefix}setWelcomeChannel <Menção de Canal/ID de Canal>\``)
+client.on("guildMemberRemove", (member) => {
+  let chx = db.get(`byechannel_${member.guild.id}`);
+  if (chx === null) {
+    return;
   }
-
-  const permissions = welcomeChannel.permissionsFor(member.guild.me);
-  if (permissions.has('SEND_MESSAGES') || permissions.has('VIEW_CHANNEL')) {
-    return member.guild.owner.user.send(`O canal que você definiu \`${welcomeChannelID}\` está privado. Defina um canal válido usando \`${prefix}setWelcomeChannel <Menção de Canal/ID de Canal>\``)
-  }
-
   const embed = new Discord.MessageEmbed()
+    .setColor('#63666b')
     .setThumbnail(member.guild.iconURL({ dynamic: true, size: 512, format: 'png' }))
     .setImage(member.user.displayAvatarURL({ dynamic: true, size: 512, format: 'png' }))
     .setDescription(`\`${member.user.tag}\` saiu.`)
     .setFooter(`ID: ${member.user.id}`);
 
-  welcomeChannel.send(embed).catch(console.error);
-})
+  client.channels.cache.get(chx).send(embed).catch(console.error);
+});
 
 // command handler
 client.on('message', async message => {
@@ -157,8 +141,7 @@ client.on('message', async message => {
 
   const args = message.content.trim().slice(prefix.length).split(/ +/);
   const commandName = args.shift().toLowerCase();
-  const command = client.commands.get(commandName) || client.commands.find(cmd => cmd.aliases.includes(commandName));
-
+  const command = client.commands.get(commandName) || client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
   if (!command) {
     const embed = new Discord.MessageEmbed()
       .setTitle('Esse comando não existe!')
@@ -167,6 +150,11 @@ client.on('message', async message => {
 
     return message.channel.send(embed);
   };
+
+  //if (message.channel.id !== '783554762409902101' && '769974977344569376')
+  //if (!message.member.hasPermission("MANAGE_MESSAGES"))
+  //return message.reply("Use comandos no <#783554762409902101>.").then(m => m.delete({ timeout: 3000 })) && message.delete();
+
 
   if (!cooldowns.has(command.name)) cooldowns.set(command.name, new Discord.Collection());
 

@@ -5,7 +5,7 @@ module.exports = {
   name: 'vazio',
   description: 'Você compra um cargo com determinada contia de VPs',
   usage: '<região>',
-  category: 'Economy',
+  category: 'Vale',
   aliases: ['sobreviventedovazio', 'sobreviventevazio'],
   cooldown: 2,
 

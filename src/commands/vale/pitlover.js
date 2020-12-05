@@ -5,7 +5,7 @@ module.exports = {
   name: 'pitlover',
   description: 'Você compra um cargo com determinada contia de VPs',
   usage: '<região>',
-  category: 'Economy',
+  category: 'Vale',
   aliases: ['cidadãodepitlover', 'cidadadodepitlover', 'cidadaopitlover'],
   cooldown: 2,
 

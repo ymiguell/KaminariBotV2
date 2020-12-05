@@ -2,8 +2,9 @@ const Discord = require('discord.js');
 
 module.exports = {
   name: 'clear',
-  description: 'Permite banir o usuário mencionado',
+  description: 'Limpa o número de mensagens escolhidas.',
   aliases: ['limpar', 'purge', 'clearchat'],
+  usage: '<valor>',
   category: 'Moderation',
   cooldown: 2,
   async execute(message, args) {

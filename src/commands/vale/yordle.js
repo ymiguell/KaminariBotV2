@@ -5,7 +5,7 @@ module.exports = {
   name: 'yordle',
   description: 'Você compra um cargo com determinada contia de VPs',
   usage: '<região>',
-  category: 'Economy',
+  category: 'Vale',
   aliases: ['umyordle', 'yordles'],
   cooldown: 2,
 

@@ -5,7 +5,7 @@ module.exports = {
   name: 'demacia',
   description: 'Você compra um cargo com determinada contia de VPs',
   usage: '<região>',
-  category: 'Economy',
+  category: 'Vale',
   aliases: ['realezademaciana', 'demaciano'],
   cooldown: 2,
 

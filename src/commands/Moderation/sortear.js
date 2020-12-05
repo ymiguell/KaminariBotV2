@@ -1,12 +1,12 @@
 const Discord = require('discord.js')
 const ms = require('ms');
-const { execute } = require('./vale/zaun');
 
 module.exports = {
   name: 'sortear',
   description: 'Sorteia ;-;',
   aliases: ['giveaway', 'sorteio'],
-  category: 'Economy',
+  usage: '<canal> <tempo> <winners> <id/nome>',
+  category: 'Moderation',
   cooldown: 2,
 
   async execute(message, args) {

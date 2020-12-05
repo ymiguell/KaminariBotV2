@@ -5,7 +5,7 @@ module.exports = {
   name: 'ionia',
   description: 'Você compra um cargo com determinada contia de VPs',
   usage: '<região>',
-  category: 'Economy',
+  category: 'Vale',
   aliases: ['mestreioniano', 'ioniano'],
   cooldown: 2,
 
